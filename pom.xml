@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.study</groupId>
+    <artifactId>movieladn-init</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+
+    <developers>
+        <developer>
+            <id>1g0r</id>
+            <name>Ihor</name>
+            <email>acc@1g0r.pp.ua</email>
+            <url>http://1g0r.pp.ua</url>
+            <roles>
+                <role>developer</role>
+            </roles>
+        </developer>
+    </developers>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <url>postgresql://ec2-54-75-231-3.eu-west-1.compute.amazonaws.com:5432/d8tmsdtk552drk</url>
+        <user>xmsrvmorkijeiq</user>
+        <password>f119a43ffb41c3663fca000769d41966178d6052fcbd55fb4a185368afada2d3</password>
+    </properties>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.codehaus.gmavenplus</groupId>
+                <artifactId>gmavenplus-plugin</artifactId>
+                <version>1.6.2</version>
+                <configuration>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>pre-create-data</id>
+                        <phase>generate-sources</phase>
+                        <goals>
+                            <goal>execute</goal>
+                        </goals>
+                        <configuration>
+                            <scripts>
+                                <script>file:///${project.basedir}/src/main/groovy/pre-create-data.groovy</script>
+                            </scripts>
+                        </configuration>
+                    </execution>
+
+                    <execution>
+                        <id>clean-schema</id>
+                        <phase>process-sources</phase>
+                        <goals>
+                            <goal>execute</goal>
+                        </goals>
+                        <configuration>
+                            <scripts>
+                                <script>file:///${project.basedir}/src/main/groovy/clean-schema.groovy</script>
+                            </scripts>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>create-schema</id>
+                        <phase>process-sources</phase>
+                        <goals>
+                            <goal>execute</goal>
+                        </goals>
+                        <configuration>
+                            <scripts>
+                                <script>file:///${project.basedir}/src/main/groovy/create-schema.groovy</script>
+                            </scripts>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>create-data</id>
+                        <phase>process-sources</phase>
+                        <goals>
+                            <goal>execute</goal>
+                        </goals>
+                        <configuration>
+                            <scripts>
+                                <script>file:///${project.basedir}/src/main/groovy/create-data.groovy</script>
+                            </scripts>
+                        </configuration>
+                    </execution>
+                </executions>
+
+                <dependencies>
+                    <dependency>
+                        <groupId>org.codehaus.groovy</groupId>
+                        <artifactId>groovy-all</artifactId>
+                        <!-- any version of Groovy \>= 1.5.0 should work here -->
+                        <version>2.5.4</version>
+                        <type>pom</type>
+                        <scope>runtime</scope>
+                    </dependency>
+                    <dependency>
+                        <groupId>org.codehaus.groovy</groupId>
+                        <artifactId>groovy-sql</artifactId>
+                        <version>2.5.4</version>
+                    </dependency>
+                    <dependency>
+                        <groupId>org.postgresql</groupId>
+                        <artifactId>postgresql</artifactId>
+                        <version>42.2.5</version>
+                    </dependency>
+                </dependencies>
+            </plugin>
+        </plugins>
+    </build>
+</project>
