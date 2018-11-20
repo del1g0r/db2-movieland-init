@@ -83,6 +83,15 @@ CREATE TABLE IF NOT EXISTS poster
 )
 """)
 
+    sql.execute("""
+CREATE TABLE IF NOT EXISTS rating
+(
+  movie_id      INTEGER    NOT NULL REFERENCES movie (id)
+, user_id       INTEGER    NOT NULL REFERENCES "user" (id)
+, rating        FLOAT      NOT NULL
+)
+""")
+
 } finally {
     sql.close()
 }

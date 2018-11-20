@@ -4,6 +4,8 @@ def sql = Sql.newInstance("jdbc:${project.properties.url}", "${project.propertie
 
 try {
 
+    sql.execute("DROP TABLE IF EXISTS rating")
+
     sql.execute("DROP TABLE IF EXISTS poster")
 
     sql.execute("DROP TABLE IF EXISTS review")

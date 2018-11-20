@@ -8,9 +8,7 @@ if (!sqlFile.exists()) {
 
     try {
         sqlFile.eachLine() { line ->
-            if (line.trim().size() == 0 || line.startsWith("--")) {
-                return null
-            } else {
+            if (line.trim().size() != 0 && !line.startsWith("--")) {
                 sql.execute(line)
             }
         }
